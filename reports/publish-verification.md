@@ -15,4 +15,4 @@
 
 本次验证覆盖包与渲染机制；未重新调用云 ASR、生图、YuE2、Suno，未重跑剪映原生音频推理或完整 Windows 流程。历史验证见 verification.md。人工完整播放与听审仍按每个真实视频执行，本次测试不将 audio_review / visual_review 改为 passed。
 
-GitHub 推送、npx skills 发现与临时目录安装由发布器在推送后执行；结果以本次发布命令输出及远端核对为准。
+首次公开推送后，qiaomu-skill-publisher 已完成 npx skills 发现与临时目录真实安装验证。生成的 review.html 中 JavaScript 通过 node --check；包内 Markdown 文件链接已核对。最终发布身份以 GitHub main 和远端文件核对为准。
