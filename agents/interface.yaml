@@ -1,0 +1,13 @@
+interface:
+  display_name: "乔木录屏成片"
+  short_description: "录屏双语字幕、语义动效、配乐与成片"
+  default_prompt: "用 qiaomu-screen2video 完成已有录屏后处理，加入克制的逐词高亮和语义动效，按推荐设置继续，不等待 HTML 确认。"
+compatibility:
+  adapter_targets: [openai, claude, generic, agent-skills-compatible]
+  activation:
+    mode: auto
+  execution:
+    context: inline
+  permissions:
+    file_write: "本次项目与技能缓存"
+    network: "所选 ASR/图片/音乐服务与开源字体下载；不发布成片"

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Screen → Video · 制作看板</title>
+<style>
+:root{font-family:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#171a18;background:#efefec;font-synthesis:none;--ink:#111513;--accent:#f05a3c;--paper:#f5f0e8;--line:#e1e1dc}*{box-sizing:border-box}body{margin:0}main{max-width:1180px;margin:auto;padding:40px 28px 70px}header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:30px}.eyebrow{font-size:11px;letter-spacing:.17em;color:#717672;text-transform:uppercase}h1{font-size:34px;letter-spacing:-1px;font-weight:700;margin:12px 0}p{color:#666c68;line-height:1.7;margin:8px 0}a{color:#a83b27}button,select,input{font:inherit}button{cursor:pointer;border:0;border-radius:7px;padding:11px 15px;background:var(--ink);color:white}button.secondary{background:#e3e3de;color:var(--ink)}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.pill{padding:7px 11px;border-radius:20px;font-size:12px;background:var(--ink);color:var(--paper);white-space:nowrap}.flow{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:25px}.step{padding:16px 12px;background:#fff;border-radius:9px;min-height:105px}.step small{display:block;color:#999d99;margin-bottom:12px}.step b{font-size:13px}.step span{display:block;font-size:12px;color:#8b8f8c;margin-top:9px}.step[data-state=done] span{color:#306947}.step[data-state=failed] span{color:#b4412d}.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}.card{background:#fff;border-radius:12px;padding:23px;margin-bottom:20px}h2{font-size:17px;margin:0 0 17px;font-weight:700}h3{font-size:13px;margin:23px 0 12px}.player{background:var(--ink);border-radius:8px;overflow:hidden;position:relative;display:grid;place-items:center;min-height:200px}.player img,.player video{display:block;width:100%;max-height:540px;object-fit:contain}.caption-demo{position:absolute;bottom:7%;left:6%;right:6%;text-align:center;pointer-events:none}.caption-demo b{display:block;font-size:clamp(17px,2.4vw,28px);font-weight:750;color:white;-webkit-text-stroke:1px #111;paint-order:stroke fill}.caption-demo b em{font-style:normal;color:var(--accent)}.caption-demo span{display:block;margin-top:6px;font-size:clamp(12px,1.55vw,19px);font-weight:600;color:#111;-webkit-text-stroke:3px white;paint-order:stroke fill}.option{display:grid;grid-template-columns:1fr 150px;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #edede8;font-size:13px}.option:last-child{border-bottom:0}select{max-width:100%;border:1px solid #dcdcd7;border-radius:6px;background:#fafaf7;padding:8px;color:inherit}input{width:100%;accent-color:var(--accent)}input[type=checkbox]{width:18px;justify-self:end}.note{font-size:12px;color:#7d827e;line-height:1.7}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.asset{width:100%;border-radius:8px}.missing{background:#f1f1ed;border-radius:7px;padding:21px;color:#7c817d;font-size:13px}.caption-list{max-height:310px;overflow:auto}.cue{padding:13px 0;border-bottom:1px solid #edede8;display:grid;grid-template-columns:54px 1fr;gap:12px}.cue time{font-size:11px;color:#8b8f8c}.cue strong{font-size:13px;font-weight:650;line-height:1.7}.cue p{font-size:12px;margin:3px 0}.motion-list{display:grid;gap:9px}.motion{display:grid;grid-template-columns:78px 1fr auto;gap:12px;align-items:start;padding:13px;border:1px solid var(--line);border-radius:8px}.motion time{font-size:11px;color:#7f8480}.motion strong{display:block;font-size:13px}.motion p{font-size:11px;margin:4px 0 0}.tag{font-size:10px;padding:4px 7px;border-radius:10px;background:#f9ddd7;color:#973924;white-space:nowrap}.review{display:flex;gap:8px;overflow:auto}.review img{width:45%;border-radius:6px}.warn{color:#a45c28;font-size:12px;line-height:1.7}audio{width:100%}.brief{font-size:14px;line-height:1.8}.footer{font-size:12px;margin-top:20px;color:#848985}@media(max-width:850px){.flow{grid-template-columns:repeat(4,1fr)}}@media(max-width:760px){main{padding:25px 17px}.grid{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}header{align-items:flex-start;flex-direction:column}h1{font-size:29px}.option{grid-template-columns:1fr 140px}.motion{grid-template-columns:68px 1fr}.tag{grid-column:2}}
+</style>
+<main>
+ <header><div><div class="eyebrow">QIAOMU / SCREEN2VIDEO</div><h1>让录屏，直接成为作品。</h1><p id="title"></p></div><span class="pill">查看与决策 · 无需等待确认</span></header>
+ <div class="flow" id="flow"></div>
+ <div class="grid">
+  <div>
+   <section class="card"><h2>成片与字幕</h2><div class="player" id="player"></div><p class="note" id="player-note"></p><div class="actions" id="outputs"></div><h3>双语逐句检查</h3><div class="caption-list" id="captions"></div></section>
+   <section class="card"><h2>语义动效时间线</h2><p class="note">逐词高亮跟随词时间戳；花字、指引与章节卡只在对应语义或操作出现。一次只保留一个主视觉。</p><div class="motion-list" id="motions"></div></section>
+   <section class="card"><h2>从讲述中提炼的封面</h2><div id="cover"></div><div class="brief" id="brief"></div></section>
+  </div>
+  <aside>
+   <section class="card"><h2>按推荐设置继续生成</h2><p class="note">此页面不控制后台任务。下载设置并交给 Agent 应用后生效。</p>
+    <label class="option">语义动效<input id="motion_enabled" type="checkbox"></label>
+    <label class="option">逐词重点高亮<input id="word_highlight" type="checkbox"></label>
+    <label class="option">轻量音效<input id="sfx_enabled" type="checkbox"></label>
+    <label class="option">音效增益 <output id="sfxgain"></output><input id="sfx_db" type="range" min="-18" max="0"></label>
+    <label class="option">字幕样式<select id="preset"><option value="contrast">中文白字 / 英文黑字</option><option value="both-white">双语白字黑描边</option><option value="band">独立深色字幕带</option></select></label>
+    <label class="option">字幕位置<select id="placement"><option value="overlay">叠加于原画面</option><option value="band">画面下方新增字幕带</option></select></label>
+    <label class="option">中文字号（1080 高度）<input id="zh_size" type="range" min="24" max="80"></label>
+    <label class="option">英文字号（1080 高度）<input id="en_size" type="range" min="18" max="64"></label>
+    <label class="option">人声音量<select id="voice_lufs"><option value="">保持原始响度</option><option value="-18">统一到 −18 LUFS</option><option value="-16">统一到 −16 LUFS</option></select></label>
+    <label class="option">配乐增益 <output id="gain"></output><input id="music_db" type="range" min="-45" max="-8"></label>
+    <label class="option">讲话时降低配乐<input id="ducking" type="checkbox"></label>
+    <label class="option">封面片头<select id="intro_seconds"><option value="0">仅独立封面</option><option value="0.7">0.7 秒</option><option value="1">1 秒</option></select></label>
+    <label class="option">品牌片尾<select id="outro_style"><option value="pulse">Pulse 荧光</option><option value="terminal">Terminal 终端</option><option value="editorial">Editorial 杂志</option><option value="community">Community 公众号</option><option value="none">无片尾</option></select></label>
+    <label class="option">片尾时长<select id="outro_seconds"><option value="0">0 秒</option><option value="6">6 秒（默认）</option><option value="8">8 秒（YouTube）</option><option value="12">12 秒（推荐内容区）</option></select></label>
+    <label class="option">音乐淡入<input id="music_fade_in" type="range" min="0" max="3" step="0.1"></label>
+    <label class="option">音乐淡出<input id="music_fade_out" type="range" min="0" max="5" step="0.1"></label>
+    <div class="actions"><button id="save">下载本次设置</button><button class="secondary" id="refresh">刷新状态</button></div><p class="note">固定默认字体：霞鹜新晰黑 + Atkinson Hyperlegible Next。真实字体、动效、安全区和混音以最终渲染为准。</p>
+   </section>
+   <section class="card"><h2>配乐</h2><div id="music"></div><p class="note">教程默认明快但克制；优先本地 YuE2，Suno 回退，并在片尾结束前淡出至静音。</p></section>
+   <section class="card"><h2>检查记录</h2><div id="checks"></div><div class="review" id="frames"></div></section>
+  </aside>
+ </div>
+ <div class="footer">Qiaomu Screen2Video · 本地制作看板 · 刷新后读取最新生成的页面快照</div>
+</main>
+<script id="data" type="application/json">__PROJECT_DATA__</script>
+<script>
+const d=JSON.parse(document.getElementById('data').textContent),$=s=>document.getElementById(s),settings=d.settings;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safePath=s=>String(s||'').split('/').map(encodeURIComponent).join('/');
+$('title').textContent=d.project.title+' · '+d.project.media.duration.toFixed(1)+' 秒';
+const phases=[['prepare','准备录屏'],['asr','识别讲述'],['captions','清理与翻译'],['motion','语义动效'],['cover','生成封面'],['music','准备配乐'],['render','合成检查']];
+$('flow').innerHTML=phases.map(([k,label],i)=>{const s=d.project.stages[k]||{state:'pending',detail:'等待处理'};return `<div class="step" data-state="${esc(s.state)}"><small>${String(i+1).padStart(2,'0')}</small><b>${label}</b><span title="${esc(s.detail)}">${({done:'已完成',running:'处理中',failed:'需处理',pending:'等待处理'})[s.state]||'等待处理'}</span></div>`}).join('');
+const ready=!!d.render.media,asset=d.project.assets||{};
+$('player').innerHTML=ready?'<video controls preload="metadata" src="output/final.mp4"></video>':'<img alt="录屏示例帧" src="assets/frame-1.jpg"><div class="caption-demo"><b>这是一个<em>重点</em>高亮</b><span>English subtitle preview.</span></div>';
+$('player-note').textContent=ready?(d.render.stale?'设置或素材已改变：这里仍显示上次成片，需重新渲染。':'已导出 '+d.render.media.width+'×'+d.render.media.height+' · '+d.render.media.duration.toFixed(1)+' 秒'):'字幕与高亮示意。真实内容会在识别、规划与翻译完成后出现。';
+if(ready)$('outputs').innerHTML='<a href="output/final.mp4" download>下载成片</a> · <a href="output/zh.srt" download>中文字幕</a> · <a href="output/en.srt" download>英文字幕</a> · <a href="output/subtitles.ass" download>ASS</a>';
+$('captions').innerHTML=d.captions.length?d.captions.map(c=>`<div class="cue"><time>${c.start.toFixed(1)}s</time><div><strong>${esc(c.zh)}</strong><p>${esc(c.en)}</p></div></div>`).join(''):'<p class="note">识别完成后，逐句字幕会显示在这里。</p>';
+const typeName={word_highlight:'逐词高亮',keyword:'关键词花字',callout:'箭头 / 聚光',chapter:'章节卡'};
+$('motions').innerHTML=d.motion.events?.length?d.motion.events.map(e=>`<div class="motion"><time>${Number(e.start).toFixed(1)}–${Number(e.end).toFixed(1)}s</time><div><strong>${esc(e.text||e.title||e.label||typeName[e.type])}</strong><p>${esc(e.reason||'根据讲述语义与画面位置触发')}${e.sfx&&e.sfx!=='none'?' · 音效 '+esc(e.sfx):''}</p></div><span class="tag">${esc(typeName[e.type]||e.type)}</span></div>`).join(''):'<div class="missing">字幕完成后生成 motion-plan.json；没有动效计划时仍可渲染基础字幕版。</div>';
+$('cover').innerHTML=asset.cover?`<img class="asset" alt="语音内容提炼封面" src="${safePath(asset.cover.path)}">`:'<div class="missing">封面生成与字幕处理可并行</div>';
+$('brief').innerHTML=`<p>${esc(d.brief.promise||'封面标题必须由实际讲述支持。')}</p><p class="note">${esc(d.brief.cover_prompt||'产品主体 + 简短结果标题 + 单一强调色；在小尺寸下检查可读性。')}</p>`;
+$('music').innerHTML=asset.music?`<audio controls src="${safePath(asset.music.path)}"></audio><p class="note">${esc(asset.music.provider)}</p>`:'<div class="missing">尚未加入配乐；字幕版仍可生成</div>';
+const warnings=[...(d.qa.warnings||[]),...(d.motion.warnings||[]).map(text=>({id:'动效',warnings:[text]})),...(d.review_notes||[]).map(text=>({id:'转写复核',warnings:[text]}))];
+$('checks').innerHTML=`<p class="note">文件解码：${esc(d.render.decode||'尚未检查')}<br>画面复核：${esc(d.render.visual_review||'尚未检查')}<br>声音复核：${esc(d.render.audio_review||'尚未检查')}<br>时间精度：${esc(d.qa.timing||'等待识别')}</p>`+warnings.map(x=>`<p class="warn">${esc(x.id)} · ${esc(x.warnings.join('、'))}</p>`).join('');
+$('frames').innerHTML=(d.render.frames||[]).map(f=>`<img alt="成片抽帧检查" src="${safePath(f)}">`).join('');
+for(const [k,v] of Object.entries(settings)){const e=$(k);if(!e)continue;if(e.type==='checkbox')e.checked=v;else e.value=v??''}
+function demo(){$('gain').value=$('music_db').value+' dB';$('sfxgain').value=$('sfx_db').value+' dB';const en=document.querySelector('.caption-demo span');if(en)en.style.color=$('preset').value==='contrast'?'#111':'#fff'}
+$('music_db').oninput=demo;$('sfx_db').oninput=demo;$('preset').onchange=()=>{if($('preset').value==='band')$('placement').value='band';demo()};demo();$('refresh').onclick=()=>location.reload();
+$('save').onclick=()=>{const obj={};for(const k of ['motion_enabled','word_highlight','sfx_enabled','sfx_db','preset','placement','zh_size','en_size','music_db','music_fade_in','music_fade_out','ducking','intro_seconds','outro_style','outro_seconds','voice_lufs']){const e=$(k);obj[k]=k==='voice_lufs'&&e.value===''?null:e.type==='checkbox'?e.checked:['preset','placement','outro_style'].includes(k)?e.value:Number(e.value)}const url=URL.createObjectURL(new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='decisions.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+</script>
+</html>

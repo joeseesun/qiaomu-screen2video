@@ -1,0 +1,43 @@
+{
+  "result": "passed",
+  "checks": [
+    "actual-denoise-improves-reference-correlation",
+    "length-and-latency-preserved",
+    "stale-transcript-rejected",
+    "asr-selected-audio-and-cache",
+    "positive-negative-zero-offset-with-applied-shift",
+    "silence-rejection-preserves-previous-selection",
+    "combined-alignment-denoise",
+    "processed-voice-cover-music-render-decode",
+    "render-cache-reuse",
+    "decoded-export-matches-selected-voice-timeline",
+    "reset-and-export-stale"
+  ],
+  "fixture_path": "/private/var/folders/7d/bj4df1t51zx3t8458lyn72400000gn/T/screen2video-local-audio-77dltr2a",
+  "offsets": [
+    {
+      "expected_ms": 1375,
+      "returned_ms": 1375.0,
+      "score": 0.9989662368598939
+    },
+    {
+      "expected_ms": -1375,
+      "returned_ms": -1375.0,
+      "score": 0.9990289293779967
+    },
+    {
+      "expected_ms": 0,
+      "returned_ms": 0.0,
+      "score": 0.9993219757923056
+    }
+  ],
+  "noisy_correlation": 0.9983372087952423,
+  "denoised_correlation": 0.9993171823319399,
+  "rendered_voice_correlation": 0.9953974417728333,
+  "decode": "passed",
+  "provider": "mocked response; real selected WAV passed to orchestrator",
+  "human_audio_review": "pending",
+  "skill_version": "0.2.0",
+  "date": "2026-10-11",
+  "target": "剪映 11.5.0 Apple Silicon"
+}

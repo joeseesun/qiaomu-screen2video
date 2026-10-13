@@ -1,0 +1,87 @@
+{
+  "recommended_threshold": 0.45,
+  "description_required_concepts": [
+    "source",
+    "action"
+  ],
+  "positive_concepts": {
+    "source": [
+      "录屏",
+      "screen recording",
+      "screen2video"
+    ],
+    "action": [
+      "字幕",
+      "配乐",
+      "成片",
+      "封面",
+      "subtitles",
+      "降噪",
+      "对齐",
+      "动效",
+      "花字",
+      "高亮"
+    ]
+  },
+  "negative_patterns": [
+    "电影",
+    "数字人",
+    "录制新的",
+    "只解释",
+    "不做视频",
+    "剪映 UI",
+    "操作剪映",
+    "用剪映给"
+  ],
+  "should_trigger": [
+    {
+      "text": "给这段录屏加中英字幕和配乐"
+    },
+    {
+      "text": "录屏加封面做成片"
+    },
+    {
+      "text": "screen recording with subtitles"
+    },
+    {
+      "text": "screen2video 加字幕"
+    },
+    {
+      "text": "给这段录屏降噪并加双语字幕"
+    },
+    {
+      "text": "把外置麦克风录音对齐录屏，用它做成片讲述"
+    },
+    {
+      "text": "录屏用本地剪映库清理底噪并加字幕"
+    },
+    {
+      "text": "给录屏加逐词高亮、花字和界面箭头"
+    }
+  ],
+  "should_not_trigger": [
+    {
+      "text": "电影解说混剪"
+    },
+    {
+      "text": "数字人配音"
+    },
+    {
+      "text": "只解释 ASS 的格式，不做视频"
+    },
+    {
+      "text": "只给这段 WAV 降噪，不做视频"
+    }
+  ],
+  "near_neighbor": [
+    {
+      "text": "用剪映给录屏加字幕"
+    },
+    {
+      "text": "录制新的产品演示，加字幕"
+    },
+    {
+      "text": "为文章设计封面"
+    }
+  ]
+}

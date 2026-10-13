@@ -1,0 +1,4 @@
+interface:
+  display_name: "乔木录屏成片"
+  short_description: "录屏双语字幕、语义动效、封面与配乐"
+  default_prompt: "用 $qiaomu-screen2video 把这段录屏制作成带双语字幕、逐词高亮、语义动效、配乐和内容封面的视频，生成 HTML 看板并按推荐设置继续完成。"

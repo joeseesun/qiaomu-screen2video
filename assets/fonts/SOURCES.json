@@ -1,0 +1,25 @@
+{
+  "fonts": [
+    {
+      "file": "LXGWNeoXiHei-Regular.ttf",
+      "family": "LXGW Neo XiHei / 霞鹜新晰黑",
+      "version": "1.305",
+      "weight": 400,
+      "source": "https://github.com/lxgw/LxgwNeoXiHei/releases/tag/v1.305",
+      "sha256": "893cfbec604768f03785ab4f369508de68c274273359a5cadee17e2852975d5c",
+      "license": "IPA",
+      "license_file": "LXGWNeoXiHei-IPA.md",
+      "license_translation": "LICENSE_CHS.md"
+    },
+    {
+      "file": "AtkinsonHyperlegibleNext-SemiBold.ttf",
+      "family": "Atkinson Hyperlegible Next",
+      "version": "Google Fonts main snapshot 2026-10-11",
+      "weight": 600,
+      "source": "https://github.com/google/fonts/tree/main/ofl/atkinsonhyperlegiblenext",
+      "sha256": "2fcd44e7b21669cde0bbe8d6f974d495bd9c59557bcacffe00014a886e98fd1a",
+      "license": "OFL-1.1",
+      "license_file": "AtkinsonHyperlegibleNext-OFL.txt"
+    }
+  ]
+}

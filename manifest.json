@@ -1,0 +1,49 @@
+{
+  "name": "qiaomu-screen2video",
+  "version": "0.16.0",
+  "description": "已有录屏加固定双语字幕、逐词高亮、关键词花字、界面指引、章节卡、原创轻音效、舒适响度、品牌片尾、可选降噪、多比例封面与配乐，使用 FFmpeg/ASS 合成",
+  "author": "向阳乔木",
+  "license": "MIT",
+  "maturity_tier": "scaffold",
+  "context_budget_tier": "production",
+  "release_gates": [
+    "package_validation",
+    "unit_tests",
+    "real_ffmpeg_export",
+    "html_render_review"
+  ],
+  "runtime_dependencies": [
+    "python>=3.10",
+    "ffmpeg with libass",
+    "ffprobe",
+    "Pillow",
+    "fonttools",
+    "numpy (music_synth.py only)",
+    "opencv-python-headless (visual.py)",
+    "ocrmac / Apple Vision (visual.py OCR, macOS)"
+  ],
+  "bundled_fonts": [
+    "LXGW Neo XiHei Regular 400 (IPA Font License 1.0)",
+    "Atkinson Hyperlegible Next SemiBold 600 (OFL-1.1)"
+  ],
+  "optional_integrations": [
+    "doubao-flash",
+    "mlx-whisper",
+    "faster-whisper",
+    "mlx-qwen3-asr",
+    "qwen-asr with aligner",
+    "codex imagegen",
+    "configured image API",
+    "local Jianying 11.5.0 SAMI (Apple Silicon, hash-pinned audio denoise/alignment)",
+    "yue2-music (on request, CUDA or Apple MPS)",
+    "Suno (on request)",
+    "fluidsynth + GM SoundFont (music_synth.py, optional)",
+    "ffmpeg afftdn denoise fallback",
+    "Noto animated emoji (CC BY 4.0, stickers)",
+    "Fluent Emoji 3D (MIT, stickers)",
+    "memegen.link templates (stickers)"
+  ],
+  "owner": "joeseesun",
+  "updated_at": "2026-10-13",
+  "status": "experimental"
+}
