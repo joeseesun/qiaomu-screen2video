@@ -4,8 +4,8 @@
 
 本简体中文译文原译为[夜煞之乐](https://github.com/NightFurySL2001)，[一点字坊](https://github.com/ichitenfont)校验内文，[落霞孤鹜](https://github.com/lxgw)改进部分翻译。本译文只供参考使用。如有任何差异，请参阅日语/英语原文条款。
 
-* [For English, please click here.](LICENSE.md/#ipa-font-license-agreement-v10)
-* [日本語バージョンは、こちらをご覧ください。](LICENSE.md)
+* [For English, please click here.](LXGWNeoXiHei-IPA.md#ipa-font-license-agreement-v10)
+* [日本語バージョンは、こちらをご覧ください。](LXGWNeoXiHei-IPA.md)
 
 ## IPA 开放字体授权协议 1.0 版
 
