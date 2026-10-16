@@ -11,6 +11,7 @@ Sources (resolved to a cached local file, then rendered into a short alpha clip)
 Animation: pop-in bounce (0→115%→96%→100% in ~0.32 s, slight tilt), gentle idle float,
 scale-down fade-out. Clips are PNG-in-MOV with alpha, overlaid by FFmpeg below the subtitles.
 """
+SCRIPT_INTERFACE = "internal-module"  # helper module; no CLI arguments
 import hashlib
 import math
 import re

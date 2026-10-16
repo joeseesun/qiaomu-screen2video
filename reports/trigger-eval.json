@@ -7,8 +7,8 @@
   ],
   "missing_description_concepts": [],
   "summary": {
-    "total": 15,
-    "passed": 15,
+    "total": 17,
+    "passed": 17,
     "false_positive": 0,
     "false_negative": 0,
     "pass_rate": 1.0
@@ -109,6 +109,32 @@
       },
       {
         "prompt": "给录屏加逐词高亮、花字和界面箭头",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "action",
+          "source"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "给这段录屏做 Vercel 风格的中英字幕和章节进度条",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "action",
+          "source"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "录屏做成 4K 成片，要纽约客那种克制的版面",
         "family": "default",
         "expected_trigger": true,
         "predicted_trigger": true,
