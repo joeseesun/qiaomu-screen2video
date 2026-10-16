@@ -1,7 +1,7 @@
 {
   "name": "qiaomu-screen2video",
-  "version": "0.16.0",
-  "description": "已有录屏加固定双语字幕、逐词高亮、关键词花字、界面指引、章节卡、原创轻音效、舒适响度、品牌片尾、可选降噪、多比例封面与配乐，使用 FFmpeg/ASS 合成",
+  "version": "0.17.0",
+  "description": "已有录屏加固定双语字幕、逐词高亮、关键词花字、界面指引、章节卡、原创轻音效、舒适响度、品牌片尾、可选降噪、多比例封面与配乐，使用 FFmpeg/ASS 合成；可选编辑风画板样式（整页大字逐字开场、分段进度线、独立介绍卡、点击涟漪、搜索打字片尾、4K）",
   "author": "向阳乔木",
   "license": "MIT",
   "maturity_tier": "scaffold",
@@ -19,7 +19,7 @@
     "Pillow",
     "fonttools",
     "numpy (music_synth.py only)",
-    "opencv-python-headless (visual.py)",
+    "opencv-python-headless (visual.py, cursor_track.py, plate_render.py)",
     "ocrmac / Apple Vision (visual.py OCR, macOS)"
   ],
   "bundled_fonts": [

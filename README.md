@@ -21,13 +21,15 @@ npx skills add joeseesun/qiaomu-screen2video
 **[中文](#中文) | [English](#english)**
 
 <a name="中文"></a>
-## 你可以这样说
+## 你可以直接这样说
 
 > “给这段录屏加中英字幕和轻配乐，做一个 B 站风格封面。”
 >
 > “把这份外置麦克风录音对齐录屏，降噪后用它作为成片讲述。”
 >
 > “保留原速，关键操作加箭头，导出 MP4 和双语 SRT。”
+>
+> “做成 Vercel × 纽约客那种克制的版面，加章节进度条，先给我三个配色方向的静帧，输出 4K。”
 
 ## 你会得到
 
@@ -131,6 +133,13 @@ Agent 负责理解讲述、清理字幕、翻译和选择动效；脚本负责�
 ```
 
 集成测试生成独立临时 fixture，检查真实 FFmpeg 导出与完整解码；合成音调仅用于测试。
+
+包结构与发布门禁（需要乔木 meta-skill）：
+
+```bash
+python3 ../qiaomu-meta-skill/scripts/validate_skill.py .
+python3 ../qiaomu-meta-skill/scripts/release_check.py . --phase local --run-tests
+```
 
 [本次发布验证](reports/publish-verification.md) · [历史运行证据](reports/verification.md) · [剪辑方法](references/editing.md) · [字幕样式](references/subtitles.md) · [语义动效](references/motion.md) · [音频处理](references/local-audio.md) · [封面与配乐](references/assets.md)
 

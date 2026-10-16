@@ -1,0 +1,127 @@
+{
+  "schema_version": "2.0.0-qiaomu-lite",
+  "generated_at": "2026-10-16",
+  "package": {
+    "name": "qiaomu-screen2video",
+    "version": "0.17.0",
+    "owner": "joeseesun",
+    "maturity_tier": "scaffold",
+    "lifecycle_stage": null,
+    "upstream_inspiration": null,
+    "upstream_sync": {}
+  },
+  "intent": {
+    "description": "将已有录屏与讲述制作成带中英双语字幕、语义动效、轻配乐和内容封面的成片，使用 FFmpeg/ASS，支持逐词重点高亮、抖音式关键词花字、表情与梗图贴纸（Noto/Fluent/memegen）、界面箭头与聚光框、章节卡、原创轻音效、屏幕 OCR 词表与镜头运动检测、本地剪映或 FFmpeg 音频降噪、独立录音对齐、豆包 ASR、本地 Whisper/Qwen、Codex 内置生图或已配置图片 API、默认代码原创合成、按需 YuE2/Suno 的纯器乐配乐，以及不阻塞生成的 HTML 制作看板；可选「编辑风画板」样式（Vercel × 纽约客：大字开场、章节进度线、4K）。用于“录屏加字幕”“录屏做成视频”“录屏降噪”“录屏加动效”“外置麦克风录音对齐录屏”“中英字幕加配乐”“录屏 Vercel/纽约客风格”“录屏章节进度条”“screen2video”。不用于拍摄新演示、剪映 UI 操作、影视混剪、数字人、配音或完整广告片。\n",
+    "job_to_be_done": "将已有录屏与讲述制作成带中英双语字幕、语义动效、轻配乐和内容封面的成片，使用 FFmpeg/ASS，支持逐词重点高亮、抖音式关键词花字、表情与梗图贴纸（Noto/Fluent/memegen）、界面箭头与聚光框、章节卡、原创轻音效、屏幕 OCR 词表与镜头运动检测、本地剪映或 FFmpeg 音频降噪、独立录音对齐、豆包 ASR、本地 Whisper/Qwen、Codex 内置生图或已配置图片 API、默认代码原创合成、按需 YuE2/Suno 的纯器乐配乐，以及不阻塞生成的 HTML 制作看板；可选「编辑风画板」样式（Vercel × 纽约客：大字开场、章节进度线、4K）。用于“录屏加字幕”“录屏做成视频”“录屏降噪”“录屏加动效”“外置麦克风录音对齐录屏”“中英字幕加配乐”“录屏 Vercel/纽约客风格”“录屏章节进度条”“screen2video”。不用于拍摄新演示、剪映 UI 操作、影视混剪、数字人、配音或完整广告片。\n",
+    "target_users": [
+      "Qiaomu operator"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "exclusions": [],
+    "qiaomu_defaults": {}
+  },
+  "triggers": {
+    "should_trigger": [
+      "给这段录屏加中英字幕和配乐",
+      "录屏加封面做成片",
+      "screen recording with subtitles",
+      "screen2video 加字幕",
+      "给这段录屏降噪并加双语字幕",
+      "把外置麦克风录音对齐录屏，用它做成片讲述",
+      "录屏用本地剪映库清理底噪并加字幕",
+      "给录屏加逐词高亮、花字和界面箭头",
+      "给这段录屏做 Vercel 风格的中英字幕和章节进度条",
+      "录屏做成 4K 成片，要纽约客那种克制的版面"
+    ],
+    "should_not_trigger": [
+      "电影解说混剪",
+      "数字人配音",
+      "只解释 ASS 的格式，不做视频",
+      "只给这段 WAV 降噪，不做视频"
+    ],
+    "near_neighbor": [
+      "用剪映给录屏加字幕",
+      "录制新的产品演示，加字幕",
+      "为文章设计封面"
+    ]
+  },
+  "workflow": {
+    "router_rules": [],
+    "compact_workflow": [],
+    "gate_ladder": [],
+    "output_contract": []
+  },
+  "resources": {
+    "references": [
+      "references/asr.md",
+      "references/assets.md",
+      "references/editing.md",
+      "references/editorial-plate.md",
+      "references/examples/rss-audio/README.md",
+      "references/local-audio.md",
+      "references/loudness.md",
+      "references/motion.md",
+      "references/outros.md",
+      "references/setup.md",
+      "references/subtitles.md"
+    ],
+    "scripts": [
+      "scripts/asr.py",
+      "scripts/cover_compose.py",
+      "scripts/cursor_track.py",
+      "scripts/editorial_ass.py",
+      "scripts/fonts.py",
+      "scripts/local_audio.py",
+      "scripts/motion.py",
+      "scripts/music_synth.py",
+      "scripts/outro_compose.py",
+      "scripts/plate_render.py",
+      "scripts/s2v.py",
+      "scripts/stickers.py",
+      "scripts/visual.py"
+    ],
+    "evals": [
+      "evals/trigger_cases.json"
+    ],
+    "reports": [
+      "reports/creation-handoff.md",
+      "reports/flower-text-research.md",
+      "reports/local-audio-verification.json",
+      "reports/local-audio-verification.md",
+      "reports/prior-art-research.md",
+      "reports/publish-verification.md",
+      "reports/research.md",
+      "reports/trigger-eval.json",
+      "reports/verification.md"
+    ]
+  },
+  "portability": {
+    "canonical_format": null,
+    "adapter_targets": [
+      "openai",
+      "claude",
+      "generic",
+      "agent-skills-compatible"
+    ],
+    "activation": {
+      "mode": "auto"
+    },
+    "execution": {
+      "context": "inline"
+    },
+    "trust": {},
+    "permissions": {
+      "file_write": "本次项目与技能缓存",
+      "network": "所选 ASR/图片/音乐服务与开源字体下载；不发布成片"
+    },
+    "degradation": {}
+  },
+  "gates": {},
+  "evidence_boundary": {
+    "generated_reports_are_evidence": true,
+    "planned_work_is_evidence": false,
+    "missing_external_or_human_evidence_label": "missing evidence",
+    "public_claim_policy": "claim only what local validation, install proof, human review, or provider-backed evidence actually supports"
+  }
+}

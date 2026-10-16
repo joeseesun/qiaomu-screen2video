@@ -1,10 +1,10 @@
 ---
 name: qiaomu-screen2video
 description: |
-  将已有录屏与讲述制作成带中英双语字幕、语义动效、轻配乐和内容封面的成片，使用 FFmpeg/ASS，支持逐词重点高亮、抖音式关键词花字、表情与梗图贴纸（Noto/Fluent/memegen）、界面箭头与聚光框、章节卡、原创轻音效、屏幕 OCR 词表与镜头运动检测、本地剪映或 FFmpeg 音频降噪、独立录音对齐、豆包 ASR、本地 Whisper/Qwen、Codex 内置生图或已配置图片 API、默认代码原创合成、按需 YuE2/Suno 的纯器乐配乐，以及不阻塞生成的 HTML 制作看板。用于“录屏加字幕”“录屏做成视频”“录屏降噪”“录屏加动效”“外置麦克风录音对齐录屏”“中英字幕加配乐”“screen2video”。不用于拍摄新演示、剪映 UI 操作、影视混剪、数字人、配音或完整广告片。
+  将已有录屏与讲述制作成带中英双语字幕、语义动效、轻配乐和内容封面的成片，使用 FFmpeg/ASS，支持逐词重点高亮、抖音式关键词花字、表情与梗图贴纸（Noto/Fluent/memegen）、界面箭头与聚光框、章节卡、原创轻音效、屏幕 OCR 词表与镜头运动检测、本地剪映或 FFmpeg 音频降噪、独立录音对齐、豆包 ASR、本地 Whisper/Qwen、Codex 内置生图或已配置图片 API、默认代码原创合成、按需 YuE2/Suno 的纯器乐配乐，以及不阻塞生成的 HTML 制作看板；可选「编辑风画板」样式（Vercel × 纽约客：大字开场、章节进度线、4K）。用于“录屏加字幕”“录屏做成视频”“录屏降噪”“录屏加动效”“外置麦克风录音对齐录屏”“中英字幕加配乐”“录屏 Vercel/纽约客风格”“录屏章节进度条”“screen2video”。不用于拍摄新演示、剪映 UI 操作、影视混剪、数字人、配音或完整广告片。
 metadata:
   author: 向阳乔木
-  version: "0.16.0"
+  version: "0.17.0"
 ---
 
 # Qiaomu Screen2Video
@@ -13,15 +13,16 @@ metadata:
 
 ## 默认选择
 
-- 原音完整保留，不剪口头语或停顿。录屏教程默认以 `speed: 1.35` 同步加速画面、讲述和字幕；用户明确要求原速时设为 `1.0`。字幕删除无意义的“呃、啊、然后”等，但保留有先后逻辑的“然后”、否定词、数字、专名。保留原始转写及文字差异。
+- 原音完整保留，不剪口头语或停顿。录屏教程默认以 `speed: 1.35` 同步加速画面、讲述和字幕；用户明确要求原速时设为 `1.0`；**产品自己朗读/试听音色的片段保持 1.0×**，加速会听不出音色差别。字幕删除无意义的“呃、啊、然后”等，但保留有先后逻辑的“然后”、否定词、数字、专名。保留原始转写及文字差异。
 - 固定默认组合 `signature`：中文 **霞鹜新晰黑 Regular 400**，英文 **Atkinson Hyperlegible Next SemiBold 600**。中文结构清晰、略有人文感而不过度圆润，英文强化易混字母与数字的区分；适合手机小屏双语字幕。两份上游字体及各自许可证（中文 IPA Font License 1.0、英文 OFL-1.1）随 skill 打包，运行时复制到缓存。
 - 中文白字黑描边，英文黑字白描边；中文在上、英文在下。同一字幕单元共享时间码。1080 高度基准字号为 **56/38**，英文约为中文 68%；中文使用 **1.2px、55% 不透明黑影**，英文使用 **0.8px、40% 不透明黑影**，描边与阴影都随画面高度同比缩放。两行采用紧凑电影字幕间距，英文基线位于底部约 7.5% 安全区。不要把剪映“字号 7”当作 FFmpeg 7px。
 - 默认开启内容驱动动效：带词时间戳的重点词使用向阳朱逐词高亮；结论、数字和产品名可出现短花字；明确界面操作使用箭头、描边框与聚光遮罩；只有真实结构转换才使用章节卡。所有时长按**最终成片时间轴**判断，必须计入 `speed`：全屏章节卡至少 1.8 秒，按文字量通常需要 2.2–4.0 秒；短于 60 秒的成片默认最多 1 张，其他转场改用花字或界面指引。花字、指引、章节卡同时只保留一个主视觉。配套 `pop/click/whoosh/chime` 均由脚本原创合成，默认轻量混入，不依赖外部音效版权素材。品牌色固定为乔木黑 `#111513`、向阳朱 `#F05A3C`、暖白 `#F5F0E8`。先读 [剪辑方法](references/editing.md)，具体 schema 见 [语义动效](references/motion.md)。
 - 原画面比例、内容与像素尺寸优先保留。默认采用电影字幕式 `overlay`，不得自动增加整块黑底。中文位于英文上方，英文靠近画面底部 7% 安全区；确有遮挡时先调整字幕位置或断句，只有用户明确选择时才用 `band`。
+- 可选样式 `editorial-plate`（用户要“Vercel / 纽约客 / 精致不要 AI 味 / 章节进度条 / 中英字幕带”时选，**非默认**）：纯黑纯白加**一个**可换的强调色（`Palette`，按内容选，先出 3 个方向静帧让用户挑，别默认蓝），录屏缩进画板，字幕在画板下方字幕带，分段细线进度条，整页大字逐字开场，搜索打字片尾。规则与禁止项见 [编辑风画板](references/editorial-plate.md)；**画面已有录屏自带缩放时不要再叠跟随放大**。
 - 封面默认片头 0.7 秒；对原视频和两种字幕同时后移。用户只要独立封面时设 `intro_seconds: 0`。
-- 片尾固定默认 `terminal` 6 秒：约 3 秒完成头像弹入、终端打字和账号行入场，完整画面定格约 2.15 秒，再用 0.7 秒渐隐并保留约 0.15 秒纯黑尾帧。文字使用随字号缩放的轻微半透明暗影，与深色背景柔和分离；不要做发光字。账号区固定为 X、GitHub、公众号「向阳乔木推荐看」和网站 `qiaomu.ai`，每项使用对应图标。根据源视频比例自动采用横版或原生竖版重排，禁止裁切横版片尾冒充竖版。
-- 所有成片都测最终混音响度并写入 `output/render.json`。默认统一到 **-17 LUFS-I**、LRA 目标 7 LU、真峰值不高于 **-1.5 dBTP**：偏轻会提升，偏响会降低，超出 ±1 LU 或真峰值高于 -1 dBTP 则不交付。`voice_lufs` 只用于特别不稳定的原始人声，默认 `null`；详见 [响度与听感](references/loudness.md)。
-- 配乐默认纯器乐。教程采用“明快、专注、有推进感”，默认 96–112 BPM、轻打击乐、简单短动机和克制低频；不要把“欢快”做成激烈鼓点、强 drop 或抢话的主旋律。低音量、半正弦曲线淡入 0.5 秒、淡出 3 秒，讲话时侧链压低；配乐必须覆盖完整片尾和末尾黑场，人声结束后侧链自然释放、音乐轻微回升，并与画面共同归零。选定讲述音轨是侧链输入。
+- 片尾默认 `terminal` 6 秒（头像弹入、终端打字、账号行 X / GitHub / 公众号「向阳乔木推荐看」/ `qiaomu.ai`），完整画面定格约 2.15 秒后渐隐；按源比例自动横竖重排，禁止裁切横版冒充竖版。规则见 [片尾](references/outros.md)。
+- 所有成片测最终混音响度并写入 `output/render.json`：统一到 **-17 LUFS-I**、LRA 目标 7 LU、真峰值 ≤ **-1.5 dBTP**，超出 ±1 LU 或真峰值高于 -1 dBTP 不交付；`voice_lufs` 默认 `null`。详见 [响度与听感](references/loudness.md)。
+- 配乐默认纯器乐：明快、专注、有推进感，96–112 BPM，不抢话；低音量，淡入 0.5 秒、淡出 3 秒，讲话时侧链压低（选定讲述音轨为侧链输入），覆盖完整片尾和末尾黑场并与画面一同归零。
 - 每一步刷新 `review.html`，不等用户打开、点选或批准。用户反馈影响后续或重渲染；HTML 本身不能启动任务。
 
 ## 快速路径（默认按此顺序，减少返工）
@@ -34,39 +35,11 @@ metadata:
 
 ## 启动与运行
 
-技能路径取本 `SKILL.md` 所在目录。个人源码只放 `/Users/joe/Nutstore Files/.agents/skills/qiaomu-screen2video`；其他发现路径使用软链接。可移植安装不依赖这个绝对路径。
-
-```bash
-# 环境只建一次；默认字幕字体已随 skill 打包，其他可选字体按需缓存。
-uv venv ~/.cache/qiaomu-screen2video/venv
-uv pip install --python ~/.cache/qiaomu-screen2video/venv/bin/python 'fonttools[woff]' pillow numpy opencv-python-headless ocrmac
-# 下文 $PY 指该环境 Python，$SKILL 指 skill 根目录，$JOB 指本次输出目录。
-"$PY" "$SKILL/scripts/fonts.py"
-# 配乐真实乐器音色（推荐，一次性）：FluidSynth + GeneralUser GS（32 MB，可商用）；缺失时自动退回纯代码合成。
-brew install fluid-synth   # Linux: apt install fluidsynth
-mkdir -p ~/.cache/qiaomu-screen2video/soundfonts && curl -fL -o ~/.cache/qiaomu-screen2video/soundfonts/GeneralUser-GS.sf2 \
-  https://raw.githubusercontent.com/mrbumpy409/GeneralUser-GS/684543d5e5efaef08d02be50dcda8d552478fa60/GeneralUser-GS.sf2
-"$PY" "$SKILL/scripts/s2v.py" init "$VIDEO" --project "$JOB"
-# 如需降噪或独立录音对齐，先执行下节的 local_audio.py，再开始 ASR。
-"$PY" "$SKILL/scripts/visual.py" analyze "$JOB"   # 屏幕词表与镜头运动，供 ASR、字幕和 callout 使用
-"$PY" "$SKILL/scripts/asr.py" "$JOB" --engine auto --context '本次视频的产品名与术语'
-```
-
-系统 FFmpeg 必须带 libass；脚本优先检测 macOS 的 `ffmpeg-full`。依赖缺失只补所需依赖，不加载 qiaomu-cut 或安装整套视频框架。识别前按 [ASR](references/asr.md) 判断引擎与时间精度。
+`$SKILL` 为本文件所在目录，`$PY` 为运行 venv 的 Python，`$JOB` 为输出目录。**环境创建、字体、FluidSynth 音色库及 init/visual/asr 命令见 [安装与启动](references/setup.md)。** 系统 FFmpeg 必须带 libass（macOS 用 `ffmpeg-full`）；缺什么补什么，不加载 qiaomu-cut 或整套视频框架。个人源码只放 `/Users/joe/Nutstore Files/.agents/skills/qiaomu-screen2video`，其他发现路径用软链接。识别前按 [ASR](references/asr.md) 选引擎。
 
 ## 可选讲述音频处理
 
-用户要求降噪，或提供同一次讲述的外置麦克风录音时，读 [本地音频](references/local-audio.md)。在 `init` 后、ASR 前运行；处理后的同一音轨同时用于识别、混音和侧链。音频变化会使旧识别缓存/字幕/成片失效，重新执行 ASR 和文字清理翻译。默认仍保留原音。
-
-```bash
-"$PY" "$SKILL/scripts/local_audio.py" "$JOB" --denoise
-# 自动估计独立录音的时间偏移，并可同时降噪：
-"$PY" "$SKILL/scripts/local_audio.py" "$JOB" --voice "$VOICE" --denoise
-# 恢复原声，随后重新执行 ASR 与渲染：
-"$PY" "$SKILL/scripts/local_audio.py" "$JOB" --reset
-```
-
-适配器仅支持已验证的 Apple Silicon macOS 剪映 11.5.0 库/模型哈希，原生推理禁止联网；不启动剪映 UI，不打包专有库/模型。检测失败明确报告，不把原声成片称为降噪成功。尚未跑通或质量不足的镜头切分、人声分离、自动卡点等不进入本流程。
+用户要求降噪，或提供同一次讲述的外置麦克风录音时，读 [本地音频](references/local-audio.md)：在 `init` 后、ASR 前运行 `local_audio.py "$JOB" --denoise`（独立录音加 `--voice "$VOICE"`，恢复用 `--reset`）；处理后的同一音轨同时用于识别、混音和侧链，音频变化会使旧识别缓存、字幕、成片失效。默认仍保留原音。适配器仅支持已验证的 Apple Silicon 剪映 11.5.0，不启动剪映 UI，不打包专有库/模型；检测失败如实报告，不把原声成片称为降噪成功。
 
 ## Agent 的四项内容工作
 
@@ -109,4 +82,4 @@ mkdir -p ~/.cache/qiaomu-screen2video/soundfonts && curl -fL -o ~/.cache/qiaomu-
 - 交付 `output/final.mp4`、`zh.srt`、`en.srt`、`bilingual.srt`、`subtitles.ass`、`motion-plan.json`、`output/motion-qa.json`、封面、`review.html`。报告 ASR 引擎和时间精度，列出未取得的可选资产。
 - 不上传/发布成片到视频平台；这需要用户另外要求。
 
-剪辑判断与节奏：[剪辑方法](references/editing.md)。样式依据与取舍：[字幕方法](references/subtitles.md)。动效时机、schema 与安全区：[语义动效](references/motion.md)。片尾规则：[片尾与关注引导](references/outros.md)。音频验收：[响度与听感](references/loudness.md)。ASR 配置：[ASR](references/asr.md)。封面/配乐：[内容与资产](references/assets.md)。
+剪辑判断与节奏：[剪辑方法](references/editing.md)。样式依据与取舍：[字幕方法](references/subtitles.md)。动效时机、schema 与安全区：[语义动效](references/motion.md)。片尾规则：[片尾与关注引导](references/outros.md)。音频验收：[响度与听感](references/loudness.md)。ASR 配置：[ASR](references/asr.md)。封面/配乐：[内容与资产](references/assets.md)。编辑风画板样式：[编辑风画板](references/editorial-plate.md)。

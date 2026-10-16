@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Install bundled defaults and download optional OFL subtitle font presets."""
+SCRIPT_INTERFACE = "internal-module"  # helper module; no CLI arguments
 import hashlib, io, json, os, shutil, urllib.request, zipfile
 from pathlib import Path
 
